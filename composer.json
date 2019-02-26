@@ -1,0 +1,26 @@
+{
+    "name": "roennie91/chuck-norris-jokes",
+    "description": "Generates random Chuck Norris Jokes",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeroen de Haar",
+            "email": "jeroen@jeroendehaar.nl"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "roennie91\\ChuckNorrisJokes\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "roennie91\\ChuckNorrisJokes\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    }
+}
