@@ -2,6 +2,10 @@
 
 namespace roennie91\ChuckNorrisJokes\Tests;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use roennie91\ChuckNorrisJokes\JokeFactory;
 
@@ -10,28 +14,19 @@ class JokeFactoryTest extends TestCase
     /** @test */
     public function it_returns_a_random_joke()
     {
-        $jokes = new JokeFactory([
-          'This is a joke',
+        // Create a mock and queue two responses.
+        $mock = new MockHandler([
+            new Response(200, [], '{ "type": "success", "value": { "id": 174, "joke": "Chuck Norris cannot love, he can only not kill.", "categories": [] } }'),
         ]);
 
-        $joke = $jokes->getRandomJoke();
+        $handler = HandlerStack::create($mock);
+        
+        $client = new Client(['handler' => $handler]);
 
-        $this->assertSame('This is a joke', $joke);
-    }
-
-    /** @test */
-    public function it_returns_a_predefined_joke()
-    {
-        $chuckNorrisJokes = [
-            'The First rule of Chuck Norris is: you do not talk about Chuck Norris.',
-            'Chuck Norris does not wear a condom. Because there is no such thing as protection from Chuck Norris.',
-            'Chuck Norris\' tears cure cancer. Too bad he has never cried.',
-        ];
-
-        $jokes = new JokeFactory;
+        $jokes = new JokeFactory($client);
 
         $joke = $jokes->getRandomJoke();
 
-        $this->assertContains($joke, $chuckNorrisJokes);
+        $this->assertSame('Chuck Norris cannot love, he can only not kill.', $joke);
     }
 }
