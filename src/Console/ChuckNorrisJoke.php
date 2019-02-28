@@ -3,7 +3,6 @@
 namespace roennie91\ChuckNorrisJokes\Console;
 
 use Illuminate\Console\Command;
-
 use roennie91\ChuckNorrisJokes\Facades\ChuckNorris;
 
 class ChuckNorrisJoke extends Command
