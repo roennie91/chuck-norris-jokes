@@ -2,24 +2,24 @@
 
 namespace roennie91\ChuckNorrisJokes\Tests;
 
-use Illuminate\Support\Facades\Artisan;
 use Orchestra\Testbench\TestCase;
-use roennie91\ChuckNorrisJokes\ChuckNorrisJokesServiceProvider;
+use Illuminate\Support\Facades\Artisan;
 use roennie91\ChuckNorrisJokes\Facades\ChuckNorris;
+use roennie91\ChuckNorrisJokes\ChuckNorrisJokesServiceProvider;
 
 class LaravelTest extends TestCase
 {
     protected function getPackageProviders($ap)
     {
         return [
-            ChuckNorrisJokesServiceProvider::class
+            ChuckNorrisJokesServiceProvider::class,
         ];
     }
 
     protected function getPackageAliases($app)
     {
         return [
-            'ChuckNorris' => ChuckNorrisJoke::class
+            'ChuckNorris' => ChuckNorrisJoke::class,
         ];
     }
 
@@ -42,7 +42,7 @@ class LaravelTest extends TestCase
     /** @test */
     public function the_route_can_be_accessed()
     {
-      ChuckNorris::shouldReceive('getRandomJoke')
+        ChuckNorris::shouldReceive('getRandomJoke')
           ->once()
           ->andReturn('some joke');
 
